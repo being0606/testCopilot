@@ -11,20 +11,32 @@
 # 부피(volume)를 계산하는 메소드.
 # 표면적(surface_area)을 계산하는 메소드.
 # 다른 Box 인스턴스와의 비교를 위한 매직 메소드(__lt__).
-# Box 인스턴스 다섯 개를 생성하고, 이들을 부피 순으로 정렬하여 출력하세요.
+# Box 인스턴스 다섯 개를 생성하고, 이들 5개의 인스턴스의 부피 순으로 정렬하여 출력하세요.
 
 # 동일한 Box 인스턴스들을 표면적 순으로 정렬하여 출력하세요.
 ####
 import random
 
-def main():
-    boxes = [Box() for _ in range(5)]
-    print('Boxes sorted by volume:')
-    for box in sorted(boxes):
-        print(box)
-    print('Boxes sorted by surface area:')
-    for box in sorted(boxes, key=lambda box: box.surface_area):
-        print(box)
-
 class Box:
-    
+    def __init__(self):
+        self.width = random.uniform(0.0, 10.0)
+        self.length = random.uniform(0.0, 10.0)
+        self.height = random.uniform(0.0, 10.0)
+
+    def volume(self):
+        return self.width * self.length * self.height
+
+    def surface_area(self):
+        return 2 * (self.width * self.length + self.length * self.height + self.height * self.width)
+
+    def __lt__(self, other):
+        return self.volume() < other.volume()
+
+    def __repr__(self):
+        return "(volume : {})".format(2 * (self.width * self.length + self.length * self.height + self.height * self.width)) 
+
+boxes = [Box() for _ in range(5)]
+
+# 역순으로 출력하는 코드 추가
+for box in sorted(boxes, reverse=True):
+    print(box)
