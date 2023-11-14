@@ -15,6 +15,7 @@ def main():
     input_number = int(input("32 bit integer: "))
     count = bin(input_number).count('1')
     print(f"{input_number} has {count} number of '1's")
+    print(f"because {bin(input_number)}")
 
 if __name__ == "__main__":
     main()
